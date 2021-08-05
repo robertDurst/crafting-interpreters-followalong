@@ -9,7 +9,7 @@ namespace Granola.Lexar
 
         public override string ToString()
         {
-            return $"{Type} {Lexeme} {Literal}";
+            return $"[{Type}] {Lexeme}";
         }
     }
 }

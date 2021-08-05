@@ -22,16 +22,61 @@ namespace Granola.Lexar
             while (!IsAtEnd())
             {
                 _startIndex = _currentIndex;
-                ScanToken();
+                _tokens.Add(ScanToken());
             }
 
-            _tokens.Add(new Token());
             return _tokens;
         }
 
         private Token ScanToken()
         {
-            return new Token();
+            switch(_source[_currentIndex])
+            {
+                case '"':
+                    return ScanString();
+
+                default:
+                    return ScanNonsense();
+            }
+        }
+
+        private Token ScanString()
+        {
+            // skip past the first paren
+            _currentIndex++;
+
+            string comment = "";
+            while (_source[_currentIndex] != '"')
+            {
+                comment += _source[_currentIndex];
+                _currentIndex ++;
+
+                if (IsAtEnd())
+                {
+                    throw new System.Exception("Improper string.");
+                }
+            }
+
+            // skip past the last paren
+            _currentIndex ++;
+
+            return new Token()
+            {
+                Lexeme = comment,
+                Type = TokenType.STRING
+            };
+        }
+
+        private Token ScanNonsense()
+        {
+            var token = new Token()
+            {
+                Lexeme = "" + _source[_currentIndex]
+            };
+
+            _currentIndex++;
+
+            return token;
         }
 
         private bool IsAtEnd()

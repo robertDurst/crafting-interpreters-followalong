@@ -52,6 +52,12 @@ namespace Granola.Commandline
         {
             // do stuff
             _scanner = new Scanner(source);
+            var tokens = _scanner.ScanTokens();
+
+            foreach(Token token in tokens)
+            {
+                Console.WriteLine(token);
+            }
         }
 
         public void Error(int line, string message)
