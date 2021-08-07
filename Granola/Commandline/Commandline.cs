@@ -1,17 +1,15 @@
 using System;
 using System.IO;
-using Granola.Lexar;
+using Granola.Lex;
 
 namespace Granola.Commandline
 {
     public class Commandline
     {
-        private Boolean _hadError;
-        private Scanner _scanner;
+        private Lexar _lexar;
 
         public Commandline()
         {
-            _hadError = false;
         }
 
         public void Invoke(string[] args)
@@ -50,11 +48,9 @@ namespace Granola.Commandline
 
         public void Run(string source)
         {
-            // do stuff
-            _scanner = new Scanner(source);
-            var tokens = _scanner.ScanTokens();
+            _lexar = new Lexar(source);
 
-            foreach(Token token in tokens)
+            foreach(Token token in _lexar.ScanTokens())
             {
                 Console.WriteLine(token);
             }
@@ -69,7 +65,6 @@ namespace Granola.Commandline
         {
             // should really actually print an error...
             Console.WriteLine($"[line {line} ] Error : {where} : {message}");
-            _hadError = true;
         }
     }
 }

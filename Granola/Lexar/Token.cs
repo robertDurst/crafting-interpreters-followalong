@@ -1,4 +1,4 @@
-namespace Granola.Lexar
+namespace Granola.Lex
 {
     public class Token
     {
@@ -9,7 +9,7 @@ namespace Granola.Lexar
 
         public override string ToString()
         {
-            return $"[{Type}] {Lexeme}";
+            return $"[{Type}] ({Lexeme}) - ({Literal})";
         }
     }
 }

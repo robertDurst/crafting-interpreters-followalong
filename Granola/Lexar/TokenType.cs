@@ -1,4 +1,4 @@
-namespace Granola.Lexar
+namespace Granola.Lex
 {
     public enum TokenType
     {
@@ -18,6 +18,9 @@ namespace Granola.Lexar
         // Keywords.
         AND, CLASS, ELSE, FALSE, FUN, FOR, IF, NIL, OR,
         PRINT, RETURN, SUPER, THIS, TRUE, VAR, WHILE,
+
+        // Comments
+        SINGLE_LINE_COMMENT,
 
         EOF
     }
